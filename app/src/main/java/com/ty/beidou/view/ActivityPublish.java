@@ -173,9 +173,6 @@ public class ActivityPublish extends BaseMvpActivity<IPublishView, PublishPresen
         btnPhoto.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 pop.dismiss();
-//                Intent intent = new Intent(ActivityPublish.this,
-//                        ActivityPicFolders.class);
-//                startActivity(intent);
                 openPhotoAlbum();
             }
         });
