@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/top_toolbar"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            style="@style/style_btn_imageviewer_item"
+            android:layout_alignParentLeft="true"
+            android:text="取消" />
+
+        <Button
+            android:id="@+id/btn_del"
+            style="@style/style_btn_imageviewer_item"
+            android:layout_centerInParent="true"
+            android:text="删除" />
+
+        <Button
+            android:id="@+id/btn_ok"
+            style="@style/style_btn_imageviewer_item"
+            android:layout_alignParentRight="true"
+            android:text="确定" />
+    </RelativeLayout>
+
+</LinearLayout>

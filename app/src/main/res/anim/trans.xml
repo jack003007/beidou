@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+  >
+    <!--0.0表示完全透明-->
+    <!--代表动画开始和结束时透明度，0.0表示完全透明，1.0表示完全不透明，Float值-->
+    <!--<alpha-->
+        <!--android:fromAlpha="0.0"-->
+        <!--android:toAlpha="1.0" />-->
+
+    <!--Float值，为动画起始到结束时，X、Y坐标上的伸缩尺寸-->
+    <!--0.0表示收缩到没有-->
+    <!--1.0表示正常无伸缩-->
+
+    <!--android:pivotX-->
+    <!--android:pivotY-->
+    <!--代表缩放的中轴点X/Y坐标，浮点值-->
+    <!--如果我们想表示中轴点为图像的中心，我们可以把两个属性值定义成0.5或者50%。-->
+    <!--<scale-->
+        <!--android:pivotX="50%"-->
+        <!--android:pivotY="50%"-->
+        <!--android:fromXScale="1.0"-->
+        <!--android:toXScale="2.0"-->
+        <!--android:fromYScale="1.0"-->
+        <!--android:toYScale="2.0"-->
+        <!--/>-->
+    <!--如果以浮点数字表示，是一个绝对值，代表相对自身原始位置的像素值；-->
+    <!--如果以num%表示，代表相对于自己的百分比，比如toXDelta定义为100%就表示在X方向上移动自己的1倍距离-->
+    <!--如果以num%p表示，代表相对于父类组件的百分比。-->
+    <!--<translate-->
+        <!--android:fromXDelta="0%"-->
+        <!--android:toXDelta="100%"-->
+        <!--android:fromYDelta="0%"-->
+        <!--android:toYDelta="100%"-->
+        <!--/>-->
+    <!--android:pivotX 属性代表旋转中心的X坐标值-->
+    <!--android:pivotY 属性代表旋转中心的Y坐标值-->
+    <!--Float值或者百分比-->
+    <!--这两个属性也有三种表示方式，但是X轴都是相对方向都是Left，Y轴都是相对于Top-->
+    <!--浮点数、num%、num%p；-->
+    <!--数字方式代表相对于自身左边缘的像素值，-->
+    <!--num%方式代表相对于自身左边缘或顶边缘的百分比，-->
+    <!--num%p方式代表相对于父容器的左边缘或顶边缘的百分比。-->
+
+    <!--属性:-->
+    <!--android:fromDegrees-->
+    <!--android:toDegrees-->
+    <!--开始和结束时的弧度位置，单位是度，Float值-->
+    <rotate
+        android:pivotX="0%"
+        android:pivotY="0%"
+        android:fromDegrees="0"
+        android:toDegrees="180"
+        />
+</set>

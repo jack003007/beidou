@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_popup"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#55000000"
+    android:orientation="vertical">
+
+
+    <Button
+        android:id="@+id/btn_item_pop_camera"
+        style="@style/style_btn_popup_item"
+        android:text="拍照"/>
+
+
+    <Button
+        android:id="@+id/btn_item_pop_photo"
+        style="@style/style_btn_popup_item"
+        android:text="从相册中选取"/>
+
+    <Button
+        android:id="@+id/btn_item_pop_cancel"
+        style="@style/style_btn_popup_item"
+        android:text="取消" />
+
+</LinearLayout>
