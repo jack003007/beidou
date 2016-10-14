@@ -6,13 +6,23 @@
     android:orientation="vertical">
 
     <include layout="@layout/top_toolbar" />
-
     <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="100dp"
-        android:layout_margin="8dp"
+        android:id="@+id/et_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
         android:background="@null"
         android:gravity="left|top"
+        android:lines="1"
+        android:hint="标题..."/>
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@null"
+        android:gravity="left|top"
+        android:lines="5"
         android:hint="写点什么..."/>
 
     <GridView

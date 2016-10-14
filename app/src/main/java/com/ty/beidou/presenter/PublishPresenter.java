@@ -3,10 +3,12 @@ package com.ty.beidou.presenter;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
 import com.orhanobut.logger.Logger;
 import com.ty.beidou.common.BasePresenter;
 import com.ty.beidou.common.Urls;
+import com.ty.beidou.model.BaseRespBean;
+import com.ty.beidou.utils.EmptyUtils;
 import com.ty.beidou.view.IPublishView;
 
 import java.io.File;
@@ -36,11 +38,13 @@ public class PublishPresenter extends BasePresenter<IPublishView> {
         mHandler = new Handler(Looper.getMainLooper());
     }
 
-    public void onResume(List<String> photos) {
+    public void onResume(String title, String content, List<String> photos) {
         OkHttpClient mOkHttpClient = new OkHttpClient();
 
         MultipartBody.Builder mBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM);
+        mBody.addFormDataPart("title", title);
+        mBody.addFormDataPart("content", content);
         //生成file,并添加到参数列表
         for (String t : photos
                 ) {
@@ -72,36 +76,16 @@ public class PublishPresenter extends BasePresenter<IPublishView> {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        JSONObject j = JSONObject.parseObject(r);
-                        mView.hideLoading();
-                        mView.requestResult(true, j.getString("msg"));
+                        BaseRespBean m = JSON.parseObject(r, BaseRespBean.class);
+                        if (EmptyUtils.isNotEmpty(m) || m.getStatus() == 200) {
+                            mView.hideLoading();
+                            mView.requestResult(true, m.getMsg());
+                        } else {//数据插入失败
+                            mView.requestResult(false, m.getMsg());
+                        }
                     }
                 });
             }
         });
     }
-
-//    public void onItemClick(int position) {
-//        if (position == TakePhotoOptions.CURRENT_NUM
-//                ) {
-//            mView.showPopWindow();
-//        } else {
-//            ArrayList<String> imagePaths = new ArrayList<>();
-//            imagePaths.clear();
-//            for (TImage t : imageList
-//                    ) {
-//                imagePaths.add(t.getPath());
-//            }
-//            Intent i = new Intent(me,
-//                    ActivityImageViewer.class);
-//            Bundle bundle = new Bundle();
-//            bundle.putInt(TakePhotoOptions.POSITION, position);
-////                    intent.putStringArrayListExtra(TakePhotoOptions.IMAGE_PATHS, imagePaths);
-////                    intent.putParcelableArrayListExtra(TakePhotoOptions.IMAGE_ALL, (ArrayList<? extends Parcelable>) imageList);
-//            bundle.putSerializable(TakePhotoOptions.IMAGE_PATHS, (Serializable) imageList);
-//            i.putExtras(bundle);
-//            startActivityForResult(i, TakePhotoOptions.CODE_VIEWER);
-//
-//        }
-
 }

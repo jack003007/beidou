@@ -1,20 +1,20 @@
 package com.ty.beidou.common;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
-import com.jph.takephoto.app.TakePhotoActivity;
+import android.support.v7.app.AppCompatActivity;
 
 /**
- * 使用TakePhoto库必须继承它的TakePhotoActivity
- * 为了实现MVP
- * 所以此处间接继承
- * Created by ty on 2016/10/9.
+ * Created by ty on 2016/10/12.
  */
 
-public abstract class BaseMvpActivityForTakePhoto<V, T extends BasePresenter<V>> extends TakePhotoActivity {
+
+public abstract class BaseMvpFragment<V, T extends BasePresenter<V>> extends Fragment {
 
     public T presenter;
+
+    protected AppCompatActivity me;
 
     /**
      * 完成presenter的初始化
@@ -22,8 +22,9 @@ public abstract class BaseMvpActivityForTakePhoto<V, T extends BasePresenter<V>>
      * @param savedInstanceState
      */
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        me = (AppCompatActivity) getActivity();
         presenter = initPresenter();
     }
 
@@ -31,16 +32,17 @@ public abstract class BaseMvpActivityForTakePhoto<V, T extends BasePresenter<V>>
      * 绑定View
      */
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
-        presenter.attach((V) this);
+        presenter.attach((V)
+                this);
     }
 
     /**
      * 解除View
      */
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         presenter.dettach();
         super.onDestroy();
     }
@@ -52,3 +54,4 @@ public abstract class BaseMvpActivityForTakePhoto<V, T extends BasePresenter<V>>
      */
     public abstract T initPresenter();
 }
+

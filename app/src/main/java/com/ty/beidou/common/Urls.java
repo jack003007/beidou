@@ -18,4 +18,9 @@ public class Urls {
      * 上传状态
      */
     public static String URL_MSG_SUBMIT = BASE + "Home/Msg/submit";
+
+    /**
+     * 所有个人动态
+     */
+    public static String URL_MSG_ALL = BASE + "Home/Msg/allmsg";
 }

@@ -16,6 +16,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.PopupWindow;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ import com.ty.beidou.common.Flags;
 import com.ty.beidou.common.MyTitleBar;
 import com.ty.beidou.presenter.PublishPresenter;
 import com.ty.beidou.test.ActivityImageViewer;
+import com.ty.beidou.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +49,10 @@ import butterknife.ButterKnife;
 public class ActivityPublish extends BaseMvpActivity<IPublishView, PublishPresenter> implements IPublishView, AdapterView.OnItemClickListener, TakePhoto.TakeResultListener, InvokeListener {
     @BindView(R.id.gv_images)
     GridView gvImages;//图片列表
+    @BindView(R.id.et_content)
+    EditText etContent;
+    @BindView(R.id.et_title)
+    EditText etTitle;
 
     private AdapterChosenGrid adapter;
 
@@ -129,7 +135,14 @@ public class ActivityPublish extends BaseMvpActivity<IPublishView, PublishPresen
         mTitleBar.setRightSingleIcon(R.drawable.icon_plane_send, "发送", new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                presenter.onResume(imagePaths);
+                String title = etTitle.getText().toString();
+                String content = etContent.getText().toString();
+//                ||EmptyUtils.isEmpty(imagePaths)
+                if (StringUtils.isSpace(title) || StringUtils.isSpace(content) ) {
+                    Toast.makeText(me, "请完善信息", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+                presenter.onResume(title, content, imagePaths);
                 return false;
             }
         });
@@ -160,7 +173,6 @@ public class ActivityPublish extends BaseMvpActivity<IPublishView, PublishPresen
                 setBackgroundTransparency(me, 1f);
             }
         });
-
 
         Button btnCamera = (Button) view.findViewById(R.id.btn_item_pop_camera);
         Button btnPhoto = (Button) view.findViewById(R.id.btn_item_pop_photo);
@@ -294,7 +306,11 @@ public class ActivityPublish extends BaseMvpActivity<IPublishView, PublishPresen
      */
     @Override
     public void requestResult(boolean success, String msg) {
-        Toast.makeText(me, msg, Toast.LENGTH_SHORT).show();
+        if (success) {
+            me.finish();
+        } else {
+            Toast.makeText(me, msg, Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -333,7 +349,6 @@ public class ActivityPublish extends BaseMvpActivity<IPublishView, PublishPresen
             bundle.putStringArrayList(Flags.Intent.IMAGE_PATHS, (ArrayList<String>) imagePaths);
             i.putExtras(bundle);
             startActivityForResult(i, Flags.Intent.CODE_VIEWER);
-
         }
     }
 

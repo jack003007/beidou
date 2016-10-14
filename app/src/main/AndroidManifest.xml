@@ -41,7 +41,6 @@
             </intent-filter>
         </activity>
         <!--某个相册文件界面-->
-        <activity android:name=".test.ActivityImageGrid" />
         <!--发布消息界面-->
         <activity
             android:name=".view.ActivityPublish"

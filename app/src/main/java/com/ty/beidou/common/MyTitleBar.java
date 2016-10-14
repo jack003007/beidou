@@ -76,7 +76,6 @@ public class MyTitleBar {
     }
 
 
-
     /**
      * 设置标题文字
      *
@@ -100,11 +99,19 @@ public class MyTitleBar {
      * @param resId
      * @param onMenuItemClickListener
      */
-    public void setRightSingleIcon(int resId, String desc,Toolbar.OnMenuItemClickListener onMenuItemClickListener) {
-        mToolbar.inflateMenu(R.menu.menu_default_titlebar);
+    public void setRightSingleIcon(int resId, String desc, Toolbar.OnMenuItemClickListener onMenuItemClickListener) {
+        if (mToolbar.getMenu().size() <= 0) mToolbar.inflateMenu(R.menu.menu_default_titlebar);
         mToolbar.getMenu().findItem(R.id.item_default).setIcon(resId);
         mToolbar.getMenu().findItem(R.id.item_default).setTitle(desc);
         mToolbar.setOnMenuItemClickListener(onMenuItemClickListener);
     }
 
+    public void clearRightSingleIcon() {
+        if (mToolbar.getMenu().size() <= 0) {
+            return;
+        }
+        mToolbar.getMenu().findItem(R.id.item_default).setIcon(0);
+        mToolbar.getMenu().findItem(R.id.item_default).setTitle("");
+        mToolbar.setOnMenuItemClickListener(null);
+    }
 }

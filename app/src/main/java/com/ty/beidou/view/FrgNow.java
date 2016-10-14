@@ -24,10 +24,9 @@ import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.orhanobut.logger.Logger;
 import com.ty.beidou.R;
-import com.ty.beidou.common.BaseFragment;
+import com.ty.beidou.common.BaseMvpFragment;
 import com.ty.beidou.model.LocationBean;
-import com.ty.beidou.presenter.FrgNowPresenterCompl;
-import com.ty.beidou.presenter.IFrgNowPresenter;
+import com.ty.beidou.presenter.FrgNowPresenter;
 import com.ty.beidou.uiutils.FlipShareView;
 import com.ty.beidou.uiutils.ShareItem;
 
@@ -40,7 +39,7 @@ import static com.ty.beidou.R.id.ib_multiple;
 /**
  * Created by ty on 2016/9/21.
  */
-public class FrgNow extends BaseFragment implements LocationSource, AMapLocationListener, View.OnClickListener, IFrgNowView {
+public class FrgNow extends BaseMvpFragment<IFrgNowView,FrgNowPresenter> implements LocationSource, AMapLocationListener, View.OnClickListener, IFrgNowView {
     private static FrgNow f = null;
     /**
      * 一个显示地图的视图（View）。它负责从服务端获取地图数据。
@@ -63,7 +62,6 @@ public class FrgNow extends BaseFragment implements LocationSource, AMapLocation
     private View mRootView;
     private ImageButton ibMultiple;
 
-    private IFrgNowPresenter fragmentNowPresenter;
     private List<LocationBean> nearbyBeans = new ArrayList<>();
 
 
@@ -84,6 +82,10 @@ public class FrgNow extends BaseFragment implements LocationSource, AMapLocation
         super.onCreate(savedInstanceState);
     }
 
+    @Override
+    public FrgNowPresenter initPresenter() {
+        return new FrgNowPresenter();
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -115,9 +117,6 @@ public class FrgNow extends BaseFragment implements LocationSource, AMapLocation
         mAMap.setMyLocationStyle(mLocationStyle);
 
 
-        fragmentNowPresenter = new FrgNowPresenterCompl(getActivity(), this);
-        fragmentNowPresenter.doRequest("xx");
-
         /*交互操作*/
         ibMultiple = (ImageButton) mRootView.findViewById(ib_multiple);
         ibMultiple.setOnClickListener(this);
@@ -128,6 +127,7 @@ public class FrgNow extends BaseFragment implements LocationSource, AMapLocation
     public void onResume() {
         super.onResume();
         mMapView.onResume();
+        presenter.onResume("");
 
     }
 
@@ -152,6 +152,7 @@ public class FrgNow extends BaseFragment implements LocationSource, AMapLocation
             mAMapLocationClient.onDestroy();
         }
     }
+
 
     /**
      * 激活定位

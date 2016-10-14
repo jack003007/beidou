@@ -4,14 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_publish"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:gravity="center"
-        android:text="发布" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycleview_msgs"
         android:layout_width="match_parent"
