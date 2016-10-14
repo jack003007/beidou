@@ -9,11 +9,14 @@ import java.util.List;
  */
 public interface IFrgNowView {
 
-
     /**
      *
-     * @param result
      * @param t
      */
-    public void requestResult(boolean result, List<LocationBean> t);
+    void success(List<LocationBean> t);
+
+    /**
+     * @param msg
+     */
+    void error(String msg);
 }

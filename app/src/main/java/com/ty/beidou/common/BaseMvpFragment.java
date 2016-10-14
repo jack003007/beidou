@@ -32,6 +32,7 @@ public abstract class BaseMvpFragment<V, T extends BasePresenter<V>> extends Fra
      * 绑定View
      */
     @Override
+    @SuppressWarnings("unchecked")
     public void onResume() {
         super.onResume();
         presenter.attach((V)

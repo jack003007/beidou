@@ -5,9 +5,38 @@ package com.ty.beidou.model;
  */
 
 public class MsgBean {
-    String title;
-    String content;
-    String time;
+
+    /**
+     * id : 23
+     * ctime : 1476366741
+     * title : 题目
+     * content : 内容
+     * supportnum : 0
+     * collectnum : 0
+     */
+
+    private String id;
+    private String ctime;
+    private String title;
+    private String content;
+    private String supportnum;
+    private String collectnum;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getCtime() {
+        return ctime;
+    }
+
+    public void setCtime(String ctime) {
+        this.ctime = ctime;
+    }
 
     public String getTitle() {
         return title;
@@ -25,11 +54,20 @@ public class MsgBean {
         this.content = content;
     }
 
-    public String getTime() {
-        return time;
+    public String getSupportnum() {
+        return supportnum;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setSupportnum(String supportnum) {
+        this.supportnum = supportnum;
     }
+
+    public String getCollectnum() {
+        return collectnum;
+    }
+
+    public void setCollectnum(String collectnum) {
+        this.collectnum = collectnum;
+    }
+
 }

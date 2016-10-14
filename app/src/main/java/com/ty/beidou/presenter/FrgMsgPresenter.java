@@ -8,12 +8,11 @@ import com.alibaba.fastjson.TypeReference;
 import com.orhanobut.logger.Logger;
 import com.ty.beidou.common.BasePresenter;
 import com.ty.beidou.common.Urls;
-import com.ty.beidou.model.LocationBean;
+import com.ty.beidou.model.MsgBean;
 import com.ty.beidou.model.ResponseBean;
-import com.ty.beidou.view.IFrgMsgsView;
+import com.ty.beidou.view.IFrgMsgView;
 
 import java.io.IOException;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -26,7 +25,7 @@ import okhttp3.Response;
 /**
  * Created by ty on 2016/9/12.
  */
-public class FrgMsgPresenter extends BasePresenter<IFrgMsgsView> {
+public class FrgMsgPresenter extends BasePresenter<IFrgMsgView> {
 
     private Handler mHandler;
 
@@ -49,7 +48,7 @@ public class FrgMsgPresenter extends BasePresenter<IFrgMsgsView> {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        mView.requestResult(false, "服务器连接异常");
+                        mView.error("服务器连接异常");
                     }
                 });
             }
@@ -61,16 +60,14 @@ public class FrgMsgPresenter extends BasePresenter<IFrgMsgsView> {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        ResponseBean<LocationBean> jsonReturn = JSON.parseObject(r, new TypeReference<ResponseBean<LocationBean>>() {
+                        ResponseBean<MsgBean> result = JSON.parseObject(r, new TypeReference<ResponseBean<MsgBean>>() {
                         });
-                        if (jsonReturn.getStatus() == 1) {
-                            List<LocationBean> m = jsonReturn.getData();
-                            mView.requestResult(true, "xxx");
+                        if (result.getStatus() == 200) {
+                            mView.success(result.getData());
                         }
                     }
                 });
             }
         });
     }
-
 }

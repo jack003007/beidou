@@ -80,7 +80,7 @@ public class ActivityImageViewer extends BaseActivity implements Toolbar.OnMenuI
 
         mTitleBar.setRightSingleIcon(R.drawable.icon_delete, "删除", this);
 
-        mViewPager.setOnPageChangeListener(mPageChangeListener);
+        mViewPager.addOnPageChangeListener(mPageChangeListener);
 
         currentPosition = pos;
         adapter = new MyPageAdapter(me, imagePaths);// 构造adapter

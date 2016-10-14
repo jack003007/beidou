@@ -4,12 +4,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.MotionEvent;
 import android.view.View;
@@ -120,9 +117,9 @@ public class ActivityLoginRegis extends BaseActivity implements ILoginView, View
         setTitle("");
         setSupportActionBar(mToolbar);
 //        改变返回键的颜色
-        Drawable iconBack = ContextCompat.getDrawable(ActivityLoginRegis.this, R.drawable.abc_ic_ab_back_mtrl_am_alpha);
-        iconBack.setColorFilter(ContextCompat.getColor(ActivityLoginRegis.this, R.color.white), PorterDuff.Mode.SRC_ATOP);
-        getSupportActionBar().setHomeAsUpIndicator(iconBack);
+////        Drawable iconBack = ContextCompat.getDrawable(ActivityLoginRegis.this, R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+//        iconBack.setColorFilter(ContextCompat.getColor(ActivityLoginRegis.this, R.color.white), PorterDuff.Mode.SRC_ATOP);
+//        getSupportActionBar().setHomeAsUpIndicator(iconBack);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         mTopbar = new MyTitleBar(ActivityLoginRegis.this);

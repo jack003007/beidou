@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ty.beidou.R;
 import com.ty.beidou.adapter.AdapterMsgs;
@@ -23,13 +24,16 @@ import butterknife.ButterKnife;
 /**
  * Created by ty on 2016/9/21.
  */
-public class FrgMsg extends BaseMvpFragment<IFrgMsgsView,FrgMsgPresenter> implements IFrgMsgsView {
+public class FrgMsg extends BaseMvpFragment<IFrgMsgView, FrgMsgPresenter> implements IFrgMsgView {
 
     private static FrgMsg f = null;
 
-    @BindView(R.id.recycleview_msgs)
-    RecyclerView mRecycleviewMsgs;
+    @BindView(R.id.rv_msg)
+    RecyclerView rvMsg;
 
+    List<MsgBean> msgList = new ArrayList<>();
+
+    AdapterMsgs adapter = null;
     //单例
     public static FrgMsg newInstance() {
         if (f == null) {
@@ -41,10 +45,12 @@ public class FrgMsg extends BaseMvpFragment<IFrgMsgsView,FrgMsgPresenter> implem
         }
         return f;
     }
+
     @Override
     public FrgMsgPresenter initPresenter() {
         return new FrgMsgPresenter();
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,30 +61,27 @@ public class FrgMsg extends BaseMvpFragment<IFrgMsgsView,FrgMsgPresenter> implem
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_news, null);
         ButterKnife.bind(this, view);
-        mRecycleviewMsgs.setLayoutManager(new LinearLayoutManager(getActivity()));
-        List<MsgBean> list = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-
-            MsgBean m = new MsgBean();
-            m.setTitle("题目" + i);
-            m.setContent("内容" + i);
-            m.setTime("时间" + i);
-            list.add(m);
-        }
-        mRecycleviewMsgs.setAdapter(new AdapterMsgs(getActivity(), list));
-
+        rvMsg.setLayoutManager(new LinearLayoutManager(me));
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        presenter.onResume("xxxx");
     }
 
 
+    @Override
+    public void success(List<MsgBean> list) {
+        msgList.clear();
+        msgList.addAll(list);
+        adapter = new AdapterMsgs(me, msgList);
+        rvMsg.setAdapter(adapter);
+    }
 
     @Override
-    public void requestResult(boolean result, String data) {
-
+    public void error(String msg) {
+        Toast.makeText(me, msg, Toast.LENGTH_SHORT).show();
     }
 }

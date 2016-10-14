@@ -59,7 +59,7 @@ public class MyTitleBar {
      * 将左侧图标设置为返回键
      */
     public void setLeftIconAsBack() {
-        setLeftIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+        setLeftIcon(R.drawable.icon_return);
     }
 
     public void setLeftOnclickListener(View.OnClickListener l) {

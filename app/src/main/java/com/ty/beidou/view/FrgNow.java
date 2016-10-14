@@ -29,6 +29,7 @@ import com.ty.beidou.model.LocationBean;
 import com.ty.beidou.presenter.FrgNowPresenter;
 import com.ty.beidou.uiutils.FlipShareView;
 import com.ty.beidou.uiutils.ShareItem;
+import com.ty.beidou.utils.EmptyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,7 @@ import static com.ty.beidou.R.id.ib_multiple;
 /**
  * Created by ty on 2016/9/21.
  */
-public class FrgNow extends BaseMvpFragment<IFrgNowView,FrgNowPresenter> implements LocationSource, AMapLocationListener, View.OnClickListener, IFrgNowView {
+public class FrgNow extends BaseMvpFragment<IFrgNowView, FrgNowPresenter> implements LocationSource, AMapLocationListener, View.OnClickListener, IFrgNowView {
     private static FrgNow f = null;
     /**
      * 一个显示地图的视图（View）。它负责从服务端获取地图数据。
@@ -86,6 +87,7 @@ public class FrgNow extends BaseMvpFragment<IFrgNowView,FrgNowPresenter> impleme
     public FrgNowPresenter initPresenter() {
         return new FrgNowPresenter();
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -252,19 +254,16 @@ public class FrgNow extends BaseMvpFragment<IFrgNowView,FrgNowPresenter> impleme
     }
 
 
-    /**
-     * 网络请求结果
-     *
-     * @param result
-     * @param t
-     */
     @Override
-    public void requestResult(boolean result, List<LocationBean> t) {
-        if (t != null && t.size() > 0) {
+    public void success(List<LocationBean> t) {
+        if (EmptyUtils.isNotEmpty(t)) {
             nearbyBeans.clear();
             nearbyBeans.addAll(t);
         }
     }
 
+    @Override
+    public void error(String msg) {
 
+    }
 }

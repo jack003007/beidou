@@ -13,7 +13,6 @@ import com.ty.beidou.model.ResponseBean;
 import com.ty.beidou.view.IFrgNowView;
 
 import java.io.IOException;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -49,7 +48,7 @@ public class FrgNowPresenter extends BasePresenter<IFrgNowView> {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        mView.requestResult(false, null);
+                        mView.error("服务器连接异常");
                     }
                 });
             }
@@ -61,11 +60,10 @@ public class FrgNowPresenter extends BasePresenter<IFrgNowView> {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        ResponseBean<LocationBean> jsonReturn = JSON.parseObject(r, new TypeReference<ResponseBean<LocationBean>>() {
+                        ResponseBean<LocationBean> result = JSON.parseObject(r, new TypeReference<ResponseBean<LocationBean>>() {
                         });
-                        if (jsonReturn.getStatus() == 1) {
-                            List<LocationBean> m = jsonReturn.getData();
-                            mView.requestResult(true, m);
+                        if (result.getStatus() == 200) {
+                            mView.success(result.getData());
                         }
                     }
                 });

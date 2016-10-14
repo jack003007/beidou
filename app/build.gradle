@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'android-apt'
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 24
     buildToolsVersion "24.0.1"
     sourceSets {
         main {
@@ -28,7 +28,6 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.orhanobut:logger:1.15'
     compile 'com.alibaba:fastjson:1.1.54.android'
@@ -42,8 +41,10 @@ dependencies {
     //
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
-//    compile project(path: ':takephoto_library')
     compile 'com.jph.takephoto:takephoto_library:3.0.0'
-    compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.android.support:recyclerview-v7:24.+'
+    compile 'com.android.support:appcompat-v7:24.1.1'
+
+    compile 'com.dinuscxj:recyclerrefreshlayout:2.0.2'
 }
 

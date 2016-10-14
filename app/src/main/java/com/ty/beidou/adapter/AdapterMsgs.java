@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.ty.beidou.R;
 import com.ty.beidou.model.MsgBean;
+import com.ty.beidou.utils.TimeUtils;
 
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class AdapterMsgs extends RecyclerView.Adapter<AdapterMsgs.ItemViewHolder
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         holder.tvTitle.setText(mBeans.get(position).getTitle());
         holder.tvContent.setText(mBeans.get(position).getContent());
-        holder.tvTimestamp.setText(mBeans.get(position).getTime());
+        holder.tvTimestamp.setText(TimeUtils.milliseconds2String(Long.parseLong(mBeans.get(position).getCtime())));
 
     }
 

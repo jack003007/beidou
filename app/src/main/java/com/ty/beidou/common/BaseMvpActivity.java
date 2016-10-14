@@ -30,6 +30,7 @@ public abstract class BaseMvpActivity<V, T extends BasePresenter<V>> extends App
      * 绑定View
      */
     @Override
+    @SuppressWarnings("unchecked")
     protected void onResume() {
         super.onResume();
         presenter.attach((V)

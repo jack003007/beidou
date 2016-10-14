@@ -26,7 +26,7 @@ public class ActivityHome extends BaseActivity implements  RadioGroup.OnCheckedC
     private RadioButton rb_msg;
 
     FrgNow mFrgNow;
-    FrgMsg mFrgMsgs;
+    FrgMsg mFrgMsg;
 
 
     Fragment mCurFragment;
@@ -79,10 +79,10 @@ public class ActivityHome extends BaseActivity implements  RadioGroup.OnCheckedC
                         return false;
                     }
                 });
-                if (mFrgMsgs == null) {
-                    mFrgMsgs = FrgMsg.newInstance();
+                if (mFrgMsg == null) {
+                    mFrgMsg = FrgMsg.newInstance();
                 }
-                switchFragments(mFrgMsgs);
+                switchFragments(mFrgMsg);
                 break;
         }
     }

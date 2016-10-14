@@ -2,6 +2,7 @@ package com.ty.beidou.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
@@ -161,7 +162,7 @@ public class ActivityPublish extends BaseMvpActivity<IPublishView, PublishPresen
         pop.setTouchable(true);
         pop.setFocusable(true);
 
-        pop.setBackgroundDrawable(new BitmapDrawable());
+        pop.setBackgroundDrawable(new BitmapDrawable(me.getResources(),(Bitmap) null));
         pop.setOutsideTouchable(true);
 //        pop.update();
         pop.setAnimationStyle(R.style.anim_popupwindow_bottom);
