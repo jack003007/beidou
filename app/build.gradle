@@ -46,5 +46,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.1.1'
 
     compile 'com.dinuscxj:recyclerrefreshlayout:2.0.2'
+
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.2.2'
 }
 

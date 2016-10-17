@@ -34,9 +34,13 @@ public class FrgMsgPresenter extends BasePresenter<IFrgMsgView> {
     }
 
 
-    public void onResume(String token) {
+    public void onResume(String sinceTime,String maxTime,String page,String count,String token) {
         OkHttpClient mOkHttpClient = new OkHttpClient();
         RequestBody body = new FormBody.Builder()
+                .add("since",sinceTime)
+                .add("max",maxTime)
+                .add("page",page)
+                .add("count",count)
                 .add("token", token)
                 .build();
         final Request request = new Request.Builder()

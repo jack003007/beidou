@@ -188,6 +188,7 @@ public class EncodeUtils {
      * @param input 待解码的字符串
      * @return Html解码后的字符串
      */
+    @SuppressWarnings("unchecked")
     public static String htmlDecode(String input) {
         return Html.fromHtml(input).toString();
     }
