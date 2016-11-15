@@ -36,10 +36,10 @@ import com.ty.beidou.R;
 import com.ty.beidou.adapter.AdapterChosenGrid;
 import com.ty.beidou.common.BaseMvpActivity;
 import com.ty.beidou.common.Flags;
-import com.ty.beidou.common.MyTitleBar;
+import com.ty.beidou.common.GeneralToolbar;
 import com.ty.beidou.presenter.PublishPresenter;
 import com.ty.beidou.test.ActivityImageViewer;
-import com.ty.beidou.utils.StringUtils;
+import com.libs.view.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +57,7 @@ public class ActivityPublish extends BaseMvpActivity<IPublishView, PublishPresen
 
     private AdapterChosenGrid adapter;
 
-    private MyTitleBar mTitleBar;
+    private GeneralToolbar mTitleBar;
 
     private List<String> imagePaths = new ArrayList<>();
     /**
@@ -124,12 +124,12 @@ public class ActivityPublish extends BaseMvpActivity<IPublishView, PublishPresen
         gvImages.setSelector(new ColorDrawable(Color.TRANSPARENT));
         gvImages.setOnItemClickListener(this);
 
-        mTitleBar = new MyTitleBar(me);
+        mTitleBar = new GeneralToolbar(me);
         mTitleBar.setLeftIconAsBack();
         mTitleBar.setLeftOnclickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                me.finish();
             }
         });
         mTitleBar.setCenterText("发布动态");

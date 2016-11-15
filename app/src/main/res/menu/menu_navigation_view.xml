@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/account"
+        android:icon="@drawable/ic_account_settings_variant_black_18dp"
+        android:title="个人信息" />
+    <item
+        android:id="@+id/workform"
+        android:icon="@drawable/ic_lead_pencil_grey600_18dp"
+        android:title="作业报表" />
+    <item
+        android:id="@+id/workplan"
+        android:icon="@drawable/ic_lead_pencil_grey600_18dp"
+        android:title="作业计划" />
+    <item
+        android:id="@+id/workchart"
+        android:icon="@drawable/ic_lead_pencil_grey600_18dp"
+        android:title="统计" />
+</menu>

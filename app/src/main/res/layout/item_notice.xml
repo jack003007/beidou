@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/F3F3F3"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv"
+        style="@style/fill_child_label"
+        android:layout_width="match_parent"
+        android:textSize="13sp"
+        android:layout_height="wrap_content"
+        android:text="测试" />
+
+</LinearLayout>

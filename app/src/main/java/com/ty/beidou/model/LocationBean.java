@@ -8,14 +8,41 @@ public class LocationBean {
     /**
      * province : 山东省
      * id : 3
-     * area : 市南区
+     * address : 市南区
      * city : 青岛市
      */
 
-    private String province;
-    private String id;
-    private String area;
+    private String address;
     private String city;
+    private String province;
+    private String district;
+    private String id;
+    private double longitude;
+    private double latitude;
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
 
     public LocationBean() {
     }
@@ -36,12 +63,12 @@ public class LocationBean {
         this.id = id;
     }
 
-    public String getArea() {
-        return area;
+    public String getAddress() {
+        return address;
     }
 
-    public void setArea(String area) {
-        this.area = area;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getCity() {

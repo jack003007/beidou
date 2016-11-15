@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/F3F3F3"
+    android:divider="@drawable/divider"
+    android:orientation="vertical"
+    android:showDividers="middle">
+
+    <include layout="@layout/top_toolbar" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_head"
+        android:layout_width="78dp"
+        android:layout_height="78dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
+        app:civ_border_color="@color/white"
+        app:civ_border_overlay="true"
+        app:civ_border_width="2dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/left_text_label"
+            android:text="姓名" />
+
+        <EditText
+            android:id="@+id/et_name"
+            style="@style/right_text_single"
+            android:hint="请输入姓名"
+            android:paddingLeft="24dp" />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_company"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/left_text_label"
+            android:text="单位" />
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/sp_company"
+            style="@style/right_text_single" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_identity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/left_text_label"
+            android:text="身份" />
+
+        <com.jaredrummler.materialspinner.MaterialSpinner
+            android:id="@+id/sp_identity"
+            style="@style/right_text_single" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:padding="15dp"
+        android:text="*个人资料请谨慎填写\n*单位一经填写不可更改\n*身份可能存在变动，会经由所属单位项目负责人确认"
+        android:textSize="13sp" />
+</LinearLayout>

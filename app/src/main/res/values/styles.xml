@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -21,18 +21,18 @@
         <item name="android:dropDownVerticalOffset">5dp</item>
     </style>
     <!--Toolbar主题-->
-    <style name="ToolBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
-        <!--Toolbar字体颜色-->
-        <item name="android:textColorPrimary">@color/white</item>
-        <!--Toolbar图标颜色-->
-        <item name="android:textColorSecondary">@color/white</item>
-        <!--菜单-->
-        <!--菜单字体大小-->
-        <item name="android:textSize">12sp</item>
-        <!--菜单字体颜色，ps:没有android前缀-->
-        <item name="actionMenuTextColor">@color/white</item>
+    <!--<style name="ToolBarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">-->
+    <!--&lt;!&ndash;Toolbar字体颜色&ndash;&gt;-->
+    <!--<item name="android:textColorPrimary">@color/white</item>-->
+    <!--&lt;!&ndash;Toolbar图标颜色&ndash;&gt;-->
+    <!--<item name="android:textColorSecondary">@color/white</item>-->
+    <!--&lt;!&ndash;菜单&ndash;&gt;-->
+    <!--&lt;!&ndash;菜单字体大小&ndash;&gt;-->
+    <!--<item name="android:textSize">12sp</item>-->
+    <!--&lt;!&ndash;菜单字体颜色，ps:没有android前缀&ndash;&gt;-->
+    <!--<item name="actionMenuTextColor">@color/white</item>-->
 
-    </style>
+    <!--</style>-->
 
     <style name="et_corner_white">
         <item name="android:layout_width">match_parent</item>
@@ -53,13 +53,13 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_weight">1</item>
         <item name="android:button">@null</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingBottom">5dp</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/home_click_text</item>
     </style>
-    <!--主页底部导航-->
+    <!--选择相片来源的PopupWindow-->
     <style name="style_btn_popup_item">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -82,4 +82,49 @@
         <item name="android:windowEnterAnimation">@anim/anim_pop_up_bottom_in</item>
         <item name="android:windowExitAnimation">@anim/anim_pop_up_bottom_out</item>
     </style>
+
+    <style name="base_dynamic_layout">
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+    </style>
+
+    <style name="fill_child_label" parent="base_dynamic_layout">
+        <item name="android:background">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginBottom">1px</item>
+    </style>
+
+    <style name="fill_child_content">
+        <item name="android:layout_marginBottom">1px</item>
+        <item name="android:background">@drawable/shape_corner_0_solild_white</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <style name="left_text_label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:textColor">@color/D9D9D9</item>
+
+    </style>
+
+    <style name="right_text_single">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:background">@drawable/shape_corner_0_solild_white</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_vertical|left</item>
+    </style>
+
+    <style name="right_text_single_number" parent="right_text_single">
+        <item name="android:inputType">number</item>
+    </style>
+
 </resources>

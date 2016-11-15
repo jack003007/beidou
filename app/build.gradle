@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId "com.ty.beidou"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
     }
@@ -32,21 +32,29 @@ dependencies {
     compile 'com.orhanobut:logger:1.15'
     compile 'com.alibaba:fastjson:1.1.54.android'
     //地图
-    compile files('libs/AMap_Location_V2.4.1_20160414.jar')
-    compile files('libs/AMap_Search_V3.4.0_20160811.jar')
-    compile files('libs/AMap_3DMap_V4.0.0_20160920.jar')
+    compile files('libs/AMap3DMap_4.1.0_AMapNavi_1.9.3_AMapSearch_3.5.0_AMapLocation_3.0.0_20161018.jar')
     //图片加载库
     compile 'com.squareup.picasso:picasso:+'
     compile 'com.github.chrisbanes.photoview:library:+'
     //
     compile 'com.jakewharton:butterknife:8.4.0'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
-    compile 'com.jph.takephoto:takephoto_library:3.0.0'
-    compile 'com.android.support:recyclerview-v7:24.+'
+    compile 'com.jph.takephoto:takephoto_library:4.0.0'
     compile 'com.android.support:appcompat-v7:24.1.1'
-
-    compile 'com.dinuscxj:recyclerrefreshlayout:2.0.2'
-
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.2.2'
+    compile 'com.android.support:recyclerview-v7:24.1.1'
+    compile 'com.android.support:design:24.1.1'
+    // appcompat v7包是必须的 Fragment库
+    compile 'me.yokeyword:fragmentation:0.7.13'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile project(':lib')
+    //FloatingActionMenu
+    compile 'com.github.clans:fab:1.6.4'
+    //圆形ImageView
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+
+    compile 'com.jaredrummler:material-spinner:1.1.0'
+
+    compile 'com.afollestad.material-dialogs:core:0.8.6.2'
 }
 

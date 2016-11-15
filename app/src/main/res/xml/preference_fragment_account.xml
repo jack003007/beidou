@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:id="@+id/name"
+        android:dialogTitle="输入您的真实姓名"
+        android:key="@string/key_user_name"
+        android:singleLine="true"
+        android:summary="设置您的真实姓名"
+        android:title="姓名" />
+
+    <ListPreference
+        android:id="@+id/identity"
+        android:dialogTitle="身份"
+        android:entries="@array/array_identity"
+        android:entryValues="@array/array_identity_values"
+        android:key="sex"
+        android:summary="选择您的身份"
+        android:title="身份" />
+
+</PreferenceScreen>

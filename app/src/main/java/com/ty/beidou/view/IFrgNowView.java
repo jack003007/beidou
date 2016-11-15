@@ -10,7 +10,6 @@ import java.util.List;
 public interface IFrgNowView {
 
     /**
-     *
      * @param t
      */
     void success(List<LocationBean> t);
@@ -19,4 +18,11 @@ public interface IFrgNowView {
      * @param msg
      */
     void error(String msg);
+
+    /**
+     * 位置提交成功
+     *
+     * @param msg
+     */
+    void postSuccess(String msg);
 }

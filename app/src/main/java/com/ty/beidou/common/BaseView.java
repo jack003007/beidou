@@ -5,13 +5,13 @@ package com.ty.beidou.common;
  */
 
 public interface BaseView {
-    /**
-     * 显示Loading
-     */
-    void showLoading();
-
-    /**
-     * 隐藏Loading
-     */
-    void hideLoading();
+//    /**
+//     * 显示Loading
+//     */
+//    void showLoading();
+//
+//    /**
+//     * 隐藏Loading
+//     */
+//    void hideLoading();
 }

@@ -2,16 +2,16 @@ package com.ty.beidou.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.ty.beidou.R;
 import com.ty.beidou.model.MsgBean;
-import com.ty.beidou.utils.TimeUtils;
+import com.libs.view.utils.TimeUtils;
 
 import java.util.List;
 
@@ -23,37 +23,26 @@ import butterknife.ButterKnife;
  * Created by ty on 2016/9/27.
  */
 
-public class AdapterMsgs extends RecyclerView.Adapter<AdapterMsgs.ItemViewHolder> {
+public class AdapterMsgs extends BaseQuickAdapter<MsgBean> {
 
     private Context context;
 
     private List<MsgBean> mBeans;
 
-    public AdapterMsgs(Context context, List<MsgBean> mBeans) {
+
+    public AdapterMsgs(int layoutResId, List<MsgBean> data, Context context) {
+        super(layoutResId, data);
         this.context = context;
-        this.mBeans = mBeans;
     }
 
     @Override
-    public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        ItemViewHolder holder = new ItemViewHolder(LayoutInflater.from(context).inflate(R.layout.item_msg, null, false));
-
-        return holder;
-    }
-
-    @Override
-    public void onBindViewHolder(ItemViewHolder holder, int position) {
-        holder.tvTitle.setText(mBeans.get(position).getTitle());
-        holder.tvContent.setText(mBeans.get(position).getContent());
-        holder.tvTimestamp.setText(TimeUtils.milliseconds2String(Long.parseLong(mBeans.get(position).getCtime())));
+    protected void convert(BaseViewHolder baseViewHolder, MsgBean msgBean) {
+        baseViewHolder.setText(R.id.tv_title, msgBean.getTitle())
+                .setText(R.id.tv_content, msgBean.getContent())
+                .setText(R.id.tv_timestamp, TimeUtils.milliseconds2String(1000L * Long.parseLong(msgBean.getCtime())));
 
     }
 
-    @Override
-    public int getItemCount() {
-        return mBeans.size();
-    }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 

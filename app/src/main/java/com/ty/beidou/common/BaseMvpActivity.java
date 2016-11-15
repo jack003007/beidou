@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.libs.view.LoadingDialog;
+
 /**
  * Created by ty on 2016/10/9.
  */
@@ -13,6 +15,7 @@ public abstract class BaseMvpActivity<V, T extends BasePresenter<V>> extends App
     public T presenter;
 
     protected AppCompatActivity me;
+    private LoadingDialog dialog;
 
     /**
      * 完成presenter的初始化
@@ -52,4 +55,17 @@ public abstract class BaseMvpActivity<V, T extends BasePresenter<V>> extends App
      * @return
      */
     public abstract T initPresenter();
+
+    /**
+     *
+     */
+    public void showLoading() {
+        dialog = LoadingDialog.newInstance();
+        dialog.show(getFragmentManager(), "xx");
+    }
+
+    public void hideLoading() {
+        if (dialog == null) return;
+        dialog.dismiss();
+    }
 }

@@ -1,16 +1,17 @@
 package com.ty.beidou.common;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
+import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * Created by ty on 2016/10/12.
  */
 
 
-public abstract class BaseMvpFragment<V, T extends BasePresenter<V>> extends Fragment {
+public abstract class BaseMvpFragment<V, T extends BasePresenter<V>> extends SupportFragment {
 
     public T presenter;
 

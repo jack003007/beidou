@@ -67,7 +67,7 @@ public class FrgMsgPresenter extends BasePresenter<IFrgMsgView> {
                         ResponseBean<MsgBean> result = JSON.parseObject(r, new TypeReference<ResponseBean<MsgBean>>() {
                         });
                         if (result.getStatus() == 200) {
-                            mView.success(result.getData());
+                            mView.success(result.getDatas());
                         }
                     }
                 });

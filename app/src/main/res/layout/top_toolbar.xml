@@ -5,15 +5,20 @@
     android:layout_height="wrap_content"
     android:background="?attr/colorPrimary"
     android:minHeight="?attr/actionBarSize"
-    app:theme="@style/ToolBarTheme"
-    app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium">
+    app:layout_scrollFlags="scroll|enterAlways"
+    app:subtitleTextColor="@color/white"
+    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    app:title=""
+    app:titleTextAppearance="@style/TextAppearance.AppCompat.Small"
+    app:titleTextColor="@color/white">
 
     <TextView
         android:id="@+id/tv_top_center"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:textColor="@android:color/white"
         android:text=""
-        android:textSize="15sp" />
+        android:textColor="@android:color/white"
+        android:textSize="14sp" />
 </android.support.v7.widget.Toolbar>

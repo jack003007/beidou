@@ -20,7 +20,7 @@ import com.squareup.picasso.Picasso;
 import com.ty.beidou.R;
 import com.ty.beidou.common.BaseActivity;
 import com.ty.beidou.common.Flags;
-import com.ty.beidou.common.MyTitleBar;
+import com.ty.beidou.common.GeneralToolbar;
 
 import java.util.ArrayList;
 
@@ -37,7 +37,7 @@ public class ActivityImageViewer extends BaseActivity implements Toolbar.OnMenuI
     private int currentPosition = 0;
 
 
-    private MyTitleBar mTitleBar;
+    private GeneralToolbar mTitleBar;
     private ArrayList<String> imagePaths;
 
     @Override
@@ -68,7 +68,7 @@ public class ActivityImageViewer extends BaseActivity implements Toolbar.OnMenuI
 
         Logger.d("pos: " + pos + "---------" + "传过去的图片数量：" + imagePaths.size());
 
-        mTitleBar = new MyTitleBar(me);
+        mTitleBar = new GeneralToolbar(me);
         mTitleBar.setLeftIconAsBack();
         mTitleBar.setLeftOnclickListener(new View.OnClickListener() {
             @Override

@@ -1,7 +1,28 @@
 <resources>
-    <string name="app_name">beidou</string>
+    <string name="app_name">高铁测量</string>
     <string name="login">登陆</string>
     <string name="register">注册</string>
     <string name="refresh">刷新</string>
     <string name="network_connect_error">服务器连接异常</string>
+    <string name="str_work">作业</string>
+    <string name="str_submit">提交</string>
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
+
+    <!--设置项-->
+    <!---->
+    <!--用户名-->
+    <string name="key_user_name">key_user_name</string>
+
+    <string-array name="array_identity">
+        <item>测量员</item>
+        <item>测量组长</item>
+        <item>指挥单位</item>
+    </string-array>
+
+    <string-array name="array_identity_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>

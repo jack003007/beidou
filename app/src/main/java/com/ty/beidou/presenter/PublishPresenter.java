@@ -8,7 +8,7 @@ import com.orhanobut.logger.Logger;
 import com.ty.beidou.common.BasePresenter;
 import com.ty.beidou.common.Urls;
 import com.ty.beidou.model.BaseRespBean;
-import com.ty.beidou.utils.EmptyUtils;
+import com.libs.view.utils.EmptyUtils;
 import com.ty.beidou.view.IPublishView;
 
 import java.io.File;
@@ -46,12 +46,14 @@ public class PublishPresenter extends BasePresenter<IPublishView> {
         mBody.addFormDataPart("title", title);
         mBody.addFormDataPart("content", content);
         //生成file,并添加到参数列表
-        for (String t : photos
-                ) {
+        for (String t : photos) {
             Logger.d("图片地址：" + t);
             File f = new File(t);
             Logger.d("生成的File对象：" + f.toString());
-            mBody.addFormDataPart(t, f.getName(), RequestBody.create(MediaType.parse("image/png"), f));
+            mBody.addFormDataPart(t
+                    , f.getName()
+                    , RequestBody.create(MediaType.parse("image/png")
+                            , f));
         }
         RequestBody mRequestBody = mBody.build();
         Request mRequest = new Request.Builder()
@@ -78,7 +80,6 @@ public class PublishPresenter extends BasePresenter<IPublishView> {
                     public void run() {
                         BaseRespBean m = JSON.parseObject(r, BaseRespBean.class);
                         if (EmptyUtils.isNotEmpty(m) || m.getStatus() == 200) {
-                            mView.hideLoading();
                             mView.requestResult(true, m.getMsg());
                         } else {//数据插入失败
                             mView.requestResult(false, m.getMsg());

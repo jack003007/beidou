@@ -8,17 +8,26 @@ import java.util.List;
 public class ResponseBean<T> extends BaseRespBean {
 
 
-    private List<T> data;
+    private List<T> datas;
 
     public ResponseBean() {
     }
 
+    private T data;
 
-    public List<T> getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(List<T> data) {
+    public void setData(T data) {
         this.data = data;
+    }
+
+    public List<T> getDatas() {
+        return datas;
+    }
+
+    public void setDatas(List<T> datas) {
+        this.datas = datas;
     }
 }

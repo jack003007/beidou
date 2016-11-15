@@ -1,0 +1,13 @@
+<!--<TextView xmlns:android="http://schemas.android.com/apk/res/android"--><!--xmlns:app="http://schemas.android.com/apk/res-auto"--><!--android:id="@+id/avi"--><!--android:layout_width="wrap_content"--><!--android:layout_height="wrap_content"--><!--android:text="ssssssssssssssssssssss"/>-->
+
+<com.wang.avi.AVLoadingIndicatorView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/avi"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:background="@color/colorPrimary"
+    app:indicatorName="BallTrianglePathIndicator" />
