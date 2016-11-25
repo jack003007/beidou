@@ -6,7 +6,7 @@ import android.os.Looper;
 import com.alibaba.fastjson.JSON;
 import com.orhanobut.logger.Logger;
 import com.ty.beidou.common.BasePresenter;
-import com.ty.beidou.common.Urls;
+import com.ty.beidou.common.API;
 import com.ty.beidou.model.BaseRespBean;
 import com.libs.view.utils.EmptyUtils;
 import com.ty.beidou.view.IPublishView;
@@ -57,7 +57,7 @@ public class PublishPresenter extends BasePresenter<IPublishView> {
         }
         RequestBody mRequestBody = mBody.build();
         Request mRequest = new Request.Builder()
-                .url(Urls.URL_MSG_SUBMIT)
+                .url(API.URL_MSG_SUBMIT)
                 .post(mRequestBody)
                 .build();
         mOkHttpClient.newCall(mRequest).enqueue(new Callback() {

@@ -1,14 +1,13 @@
 package com.ty.beidou.presenter;
 
-import android.os.Handler;
-import android.os.Looper;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.orhanobut.logger.Logger;
+import com.ty.beidou.R;
+import com.ty.beidou.common.API;
 import com.ty.beidou.common.BasePresenter;
+import com.ty.beidou.common.HttpSimpleRST;
 import com.ty.beidou.common.MApplication;
-import com.ty.beidou.common.Urls;
 import com.ty.beidou.model.BaseRespBean;
 import com.ty.beidou.model.ResponseBean;
 import com.ty.beidou.model.UserBean;
@@ -29,38 +28,18 @@ import okhttp3.Response;
  */
 public class IAccountPresenter extends BasePresenter<IAccountView> {
 
-    private Handler mHandler;
-
-    public IAccountPresenter() {
-        mHandler = new Handler(Looper.getMainLooper());
-    }
-
     /**
      * 登陆
-     *
-     * @param phone 账号
-     * @param passwd 密码
      */
-    public void doLogin(String phone, String passwd) {
-        //创建对象
-        OkHttpClient mOkHttpClient = new OkHttpClient();
-        //创建request
-        RequestBody body = new FormBody.Builder()
-                .add("phone", phone)
-                .add("passwd", passwd).build();
-
-        final Request request = new Request
-                .Builder().url(Urls.URL_LOGIN).post(body).build();
-        Call call = mOkHttpClient.newCall(request);
-        //请求加入调度
-        call.enqueue(new Callback() {
+    public void doLogin(String json) {
+        Logger.d(json);
+        HttpSimpleRST.putJson(json, API.URL_LOGIN, new Callback() {
             @Override
-            public void onFailure(Call call, final IOException e) {
-                final String msg = e.getMessage();
+            public void onFailure(Call call, IOException e) {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        mView.error(msg);
+                        mView.netError(R.string.network_connect_error);
                     }
                 });
             }
@@ -78,8 +57,7 @@ public class IAccountPresenter extends BasePresenter<IAccountView> {
                         if (m.getStatus() == 1 && m.getData() != null) {//成功
                             UserBean user = m.getData();
                             MApplication.getInstance().setUser(user);
-                            MApplication.getInstance().setToken(m.getToken());
-                            Logger.d("token:"+m.getToken());
+                            Logger.d(user);
                             mView.loginSuccess("登陆成功");
                         } else {
                             mView.error(m.getMsg());
@@ -103,7 +81,7 @@ public class IAccountPresenter extends BasePresenter<IAccountView> {
                 .add("token", token).build();
 
         final Request request = new Request
-                .Builder().url(Urls.URL_AUTOLOGIN).post(body).build();
+                .Builder().url(API.URL_AUTOLOGIN).post(body).build();
         Call call = mOkHttpClient.newCall(request);
         //请求加入调度
         call.enqueue(new Callback() {
@@ -157,7 +135,7 @@ public class IAccountPresenter extends BasePresenter<IAccountView> {
                 .build();
 
         final Request request = new Request
-                .Builder().url(Urls.URL_REGIS).post(body).build();
+                .Builder().url(API.URL_REGIS).post(body).build();
         Call call = mOkHttpClient.newCall(request);
         //请求加入调度
         call.enqueue(new Callback() {

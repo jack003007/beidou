@@ -16,9 +16,9 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.ty.beidou.R;
+import com.ty.beidou.common.API;
 import com.ty.beidou.common.BaseActivity;
 import com.ty.beidou.common.MApplication;
-import com.ty.beidou.common.Urls;
 import com.ty.beidou.model.UserBean;
 import com.ty.beidou.preference.ActivityPreferenceHome;
 
@@ -33,6 +33,7 @@ public class ActivityHome extends BaseActivity {
 
 
     private ActionBarDrawerToggle mDrawerToggle;
+    private NavigationView mNavigationView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,11 +56,9 @@ public class ActivityHome extends BaseActivity {
     private void setDrawerMenu(final Toolbar toolbar) {
         setSupportActionBar(toolbar);
         final DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer);
-        NavigationView mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
+        mNavigationView = (NavigationView) findViewById(R.id.navigation_view);
 
-        mDrawerToggle = new ActionBarDrawerToggle(this
-                , mDrawerLayout
-                , toolbar
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar
                 , R.string.open
                 , R.string.close) {
             public void onDrawerClosed(View view) {
@@ -80,36 +79,51 @@ public class ActivityHome extends BaseActivity {
                         startActivity(new Intent(me, ActivityPreferenceHome.class));
                         break;
                     case R.id.workform:
-                        startActivity(new Intent(me, ActivityPublishWork.class));
+                        startActivity(new Intent(me, ActivityPutWork.class));
+                        break;
+                    case R.id.workplan:
+                        startActivity(new Intent(me, ActivityPutPlan.class));
+                        break;
+                    case R.id.personapprove:
+                        startActivity(new Intent(me, ActivityPutPlan.class));
+                        break;
+
+                    case R.id.workchart:
+                        startActivity(new Intent(me, ActivityWorkChart.class));
                         break;
                 }
                 mDrawerLayout.closeDrawers();
                 return true;
             }
         });
+    }
+
+
+    private void initUserData() {
         View v = mNavigationView.getHeaderView(0);
-        //头像
-        CircleImageView iv_header = (CircleImageView) v.findViewById(R.id.iv_head);
-        //名字
-        TextView tv_name = (TextView) v.findViewById(R.id.tv_name);
-        //身份
-        TextView tv_identity = (TextView) v.findViewById(R.id.tv_identity);
-        //工作单位
-        TextView tv_company = (TextView) v.findViewById(R.id.tv_company);
+
+        CircleImageView iv_header = (CircleImageView) v.findViewById(R.id.iv_head);//头像
+
+        TextView tv_name = (TextView) v.findViewById(R.id.tv_name); //名字
+
+        TextView tv_identity = (TextView) v.findViewById(R.id.tv_identity);//身份
+
+        TextView tv_company = (TextView) v.findViewById(R.id.tv_company);//工作单位
+
         iv_header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(me, ActivityUserInfo.class));
             }
         });
-        UserBean m = MApplication.getInstance().getUser();
+        UserBean user = MApplication.getInstance().getUser();
         Picasso.with(me)
-                .load(Urls.BASE + m.getOrigin())
+                .load(API.BASE + user.getHead_thumb())
                 .fit()
                 .into(iv_header);
-        tv_name.setText(m.getRealname());
-        tv_identity.setText(m.getIdentity());
-        tv_company.setText(m.getCompany());
+        tv_name.setText(user.getRealname());
+        tv_identity.setText(user.getGtitle());
+        tv_company.setText(user.getCompany_name());
     }
 
     @Override
@@ -138,6 +152,7 @@ public class ActivityHome extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        initUserData();
 //        String a = PreferenceManager.getDefaultSharedPreferences(me)
 //                .getString(getResources()
 //                        .getString(R.string.key_user_name), "");

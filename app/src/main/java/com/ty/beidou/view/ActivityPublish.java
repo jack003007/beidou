@@ -353,4 +353,14 @@ public class ActivityPublish extends BaseMvpActivity<IPublishView, PublishPresen
         }
     }
 
+    /**
+     * 网络故障
+     *
+     * @param resourceId
+     */
+    @Override
+    public void netError(int resourceId) {
+        hideLoading();
+        Toast.makeText(me, getResources().getString(resourceId), Toast.LENGTH_SHORT).show();
+    }
 }

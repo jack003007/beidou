@@ -48,12 +48,12 @@ public class SimpleStyle extends ChildStyle {
 
 
     @Override
-    public HashMap getValue() {
+    public HashMap<String,String> getValue() {
         String v = eDValue.getText().toString() ;
         if (StringUtils.isEmpty(v)) {
             throw new RuntimeException("值为空");
         }
-        HashMap hashMap = new HashMap();
+        HashMap<String,String> hashMap = new HashMap<>();
         hashMap.put(field, v);
         return hashMap;
     }

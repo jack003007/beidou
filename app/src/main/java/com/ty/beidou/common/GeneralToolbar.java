@@ -40,6 +40,16 @@ public class GeneralToolbar {
         tv_center = (TextView) mActivity.findViewById(R.id.tv_top_center);
     }
 
+
+    public void inflateMenu(int MenuId) {
+        mToolbar.inflateMenu(MenuId);
+
+    }
+
+    public void setOnMenuItemClickListener(Toolbar.OnMenuItemClickListener listener) {
+        mToolbar.setOnMenuItemClickListener(listener);
+    }
+
     /**
      * 左侧图标
      *

@@ -30,7 +30,7 @@ import com.ty.beidou.R;
 import com.ty.beidou.common.BaseMvpActivity;
 import com.ty.beidou.common.GeneralToolbar;
 import com.ty.beidou.common.MApplication;
-import com.ty.beidou.common.Urls;
+import com.ty.beidou.common.API;
 import com.ty.beidou.model.UserBean;
 import com.ty.beidou.presenter.UserInfoPresenter;
 import com.ty.beidou.widget.PhotoDialog;
@@ -85,8 +85,8 @@ public class ActivityUserInfo extends BaseMvpActivity<IUserInfoView, UserInfoPre
         setToolbar();
         setView();
         showLoading();
-        presenter.getCompanyFromServer(MApplication.getInstance().getToken());
-        presenter.getIdentityFromServer(MApplication.getInstance().getToken());
+        presenter.getCompanyFromServer();
+        presenter.getIdentityFromServer();
     }
 
     @Override
@@ -101,7 +101,7 @@ public class ActivityUserInfo extends BaseMvpActivity<IUserInfoView, UserInfoPre
     private void setView() {
         user = MApplication.getInstance().getUser();
         Picasso.with(me)
-                .load(Urls.BASE + user.getOrigin())
+                .load(API.BASE + user.getHead_thumb())
                 .fit()
                 .into(ivHead);
         etName.setText(user.getRealname());
@@ -128,7 +128,7 @@ public class ActivityUserInfo extends BaseMvpActivity<IUserInfoView, UserInfoPre
     @OnClick(R.id.iv_head)
     void click_head() {
         Bundle bundle = new Bundle();
-        bundle.putString("url", Urls.BASE + user.getOrigin());
+        bundle.putString("url", API.BASE + user.getHead_thumb());
         final PhotoDialog dialog = PhotoDialog.newInstance(bundle);
         dialog.setPhotoClickListener(new View.OnClickListener() {
             @Override
@@ -187,21 +187,21 @@ public class ActivityUserInfo extends BaseMvpActivity<IUserInfoView, UserInfoPre
             hash.put("realname", name);
         }
         if (!TextUtils.isEmpty(companyId)
-                && !companyId.equals(hashCompany.get(user.getCompany()))) {
-            hash.put("companyid", companyId);
+                && !companyId.equals(hashCompany.get(user.getCompany_id()))) {
+            hash.put("company_id", companyId);
         }
         if (!TextUtils.isEmpty(identityId)
-                && !identityId.equals(hashCompany.get(user.getIdentity()))) {
-            hash.put("identityid", identityId);
+                && !identityId.equals(hashCompany.get(user.getGid()))) {
+            hash.put("gid", identityId);
         }
         if (hash.isEmpty()) {
             Toast.makeText(me, "数据好像没有变更", Toast.LENGTH_SHORT).show();
             return;
         }
-        String settingJson = JSON.toJSONString(hash);
-        Logger.d("开始提交数据：" + settingJson);
+        String json = JSON.toJSONString(hash);
+        Logger.d("开始提交数据：" + json);
         showLoading();
-        presenter.putSettingToServer(MApplication.getInstance().getToken(), settingJson, "");
+        presenter.putSetting(json, "");
     }
 
     /**
@@ -223,7 +223,7 @@ public class ActivityUserInfo extends BaseMvpActivity<IUserInfoView, UserInfoPre
     public void putSuccess(String msg) {
         hideLoading();
         user = MApplication.getInstance().getUser();
-        Picasso.with(me).load(Urls.BASE + user.getOrigin()).fit().into(ivHead);
+        Picasso.with(me).load(API.BASE + user.getHead_thumb()).fit().into(ivHead);
         Toast.makeText(me, msg, Toast.LENGTH_SHORT).show();
     }
 
@@ -238,16 +238,7 @@ public class ActivityUserInfo extends BaseMvpActivity<IUserInfoView, UserInfoPre
         Toast.makeText(me, msg, Toast.LENGTH_SHORT).show();
     }
 
-    /**
-     * 提交失败
-     *
-     * @param msg
-     */
-    @Override
-    public void netError(String msg) {
-        hideLoading();
-        Toast.makeText(me, msg, Toast.LENGTH_SHORT).show();
-    }
+
 
     /**
      * 获取公司名称列表
@@ -261,14 +252,14 @@ public class ActivityUserInfo extends BaseMvpActivity<IUserInfoView, UserInfoPre
         hashCompany.putAll(hash);
         spCompany.setItems(hashCompany.keySet().toArray());
         //定位到现有值
-        String company = MApplication.getInstance().getUser().getCompany();
+        String company = MApplication.getInstance().getUser().getCompany_name();
         for (int i = 0; i < hashCompany.size(); i++) {
             if (company.equals(spCompany.getItems().get(i))) {
                 spCompany.setSelectedIndex(i);
             }
         }
         //如果单位已定，不可更改
-        if (!user.getCompany().equals("1")) {
+        if (!user.getCompany_id().equals("1")) {
             spCompany.setEnabled(false);
         }
     }
@@ -280,12 +271,12 @@ public class ActivityUserInfo extends BaseMvpActivity<IUserInfoView, UserInfoPre
      */
 
     @Override
-    public void getIdentitySuccess(HashMap<String, String> hash) {
+    public void getGroupSuccess(HashMap<String, String> hash) {
         hideLoading();
         hashIdentity.clear();
         hashIdentity.putAll(hash);
         //测量员和测量组长可以在单位内部更替
-        String iid = user.getIdentityid();
+        String iid = user.getGid();
         if (!iid.equals("1")) {
             hashIdentity.remove("未认证");
         }
@@ -297,7 +288,7 @@ public class ActivityUserInfo extends BaseMvpActivity<IUserInfoView, UserInfoPre
         }
         spIdentity.setItems(hashIdentity.keySet().toArray());
         //定位到现有值
-        String identity = user.getIdentity();
+        String identity = user.getGid();
         for (int i = 0; i < hashIdentity.size(); i++) {
             if (identity.equals(spIdentity.getItems().get(i))) {
                 spIdentity.setSelectedIndex(i);
@@ -326,7 +317,7 @@ public class ActivityUserInfo extends BaseMvpActivity<IUserInfoView, UserInfoPre
         Logger.d(path);
         if (!TextUtils.isEmpty(path)) {
             //上传头像
-            presenter.putSettingToServer(MApplication.getInstance().getToken(), "", path);
+            presenter.putSetting("", path);
         }
 
     }
@@ -370,5 +361,16 @@ public class ActivityUserInfo extends BaseMvpActivity<IUserInfoView, UserInfoPre
         }
         return takePhoto;
     }
+
     /*------------拍照、相册相关方法--------------*/
+    /**
+     * 网络故障
+     *
+     * @param resourceId
+     */
+    @Override
+    public void netError(int resourceId) {
+        hideLoading();
+        Toast.makeText(me, getResources().getString(resourceId), Toast.LENGTH_SHORT).show();
+    }
 }

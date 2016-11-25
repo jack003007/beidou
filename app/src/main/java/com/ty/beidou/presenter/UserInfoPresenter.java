@@ -1,33 +1,29 @@
 package com.ty.beidou.presenter;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.libs.view.utils.EmptyUtils;
 import com.orhanobut.logger.Logger;
+import com.ty.beidou.R;
+import com.ty.beidou.common.API;
 import com.ty.beidou.common.BasePresenter;
+import com.ty.beidou.common.HttpFilesRST;
+import com.ty.beidou.common.HttpSimpleRST;
 import com.ty.beidou.common.MApplication;
-import com.ty.beidou.common.Urls;
 import com.ty.beidou.model.HashBean;
 import com.ty.beidou.model.ResponseBean;
 import com.ty.beidou.model.UserBean;
 import com.ty.beidou.view.IUserInfoView;
 
-import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 
@@ -37,43 +33,24 @@ import okhttp3.Response;
 
 public class UserInfoPresenter extends BasePresenter<IUserInfoView> {
 
-    private Handler mHandler;
-
-
-    public UserInfoPresenter() {
-        mHandler = new Handler(Looper.getMainLooper());
-    }
 
     /**
      * 提交设置给服务器
      */
-    public void putSettingToServer(String token, String settingJson, String photoPath) {
+    public void putSetting(String json, String photoPath) {
 
-        OkHttpClient mOkHttpClient = new OkHttpClient();
-        MultipartBody.Builder mMultipartBody = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM);
-        mMultipartBody.addFormDataPart("token", token);
-        mMultipartBody.addFormDataPart("settingJson", settingJson);
+        List<String> pathList = new ArrayList<>();
         if (!TextUtils.isEmpty(photoPath)) {
-            File f = new File(photoPath);
-            mMultipartBody.addFormDataPart(photoPath
-                    , f.getName()
-                    , RequestBody.create(MediaType.parse("image/png")
-                            , f));
+            pathList.add(photoPath);
         }
 
-        RequestBody mRequestBody = mMultipartBody.build();
-
-        final Request mRequest = new Request
-                .Builder().url(Urls.URL_MODIFY).post(mRequestBody).build();
-        Call call = mOkHttpClient.newCall(mRequest);
-        call.enqueue(new Callback() {
+        HttpFilesRST.putFiles(pathList, json, API.URL_MODIFY, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        mView.netError("服务器连接异常");
+                        mView.netError(R.string.network_connect_error);
                     }
                 });
             }
@@ -103,22 +80,15 @@ public class UserInfoPresenter extends BasePresenter<IUserInfoView> {
     /**
      * 获取公司名称列表设置给服务器
      */
-    public void getCompanyFromServer(String token) {
-        OkHttpClient mOkHttpClient = new OkHttpClient();
-
-        RequestBody body = new FormBody.Builder()
-                .add("token", token)
-                .build();
-        final Request mRequest = new Request
-                .Builder().url(Urls.URL_COMPANY).post(body).build();
-        Call call = mOkHttpClient.newCall(mRequest);
-        call.enqueue(new Callback() {
+    public void getCompanyFromServer() {
+        HttpSimpleRST.getDataAutoAddToken(API.URL_COMPANY, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        mView.netError("服务器连接异常");
+                        mView.netError(R.string.network_connect_error);
                     }
                 });
             }
@@ -151,22 +121,15 @@ public class UserInfoPresenter extends BasePresenter<IUserInfoView> {
     /**
      * 获取身份列表设置给服务器
      */
-    public void getIdentityFromServer(String token) {
-        OkHttpClient mOkHttpClient = new OkHttpClient();
 
-        RequestBody body = new FormBody.Builder()
-                .add("token", token)
-                .build();
-        final Request mRequest = new Request
-                .Builder().url(Urls.URL_IDENTITY).post(body).build();
-        Call call = mOkHttpClient.newCall(mRequest);
-        call.enqueue(new Callback() {
+    public void getIdentityFromServer() {
+        HttpSimpleRST.getDataAutoAddToken(API.URL_GROUP, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        mView.netError("服务器连接异常");
+                        mView.netError(R.string.network_connect_error);
                     }
                 });
             }
@@ -186,7 +149,7 @@ public class UserInfoPresenter extends BasePresenter<IUserInfoView> {
                             for (int i = 0; i < m.getDatas().size(); i++) {
                                 hash.put(m.getDatas().get(i).getValue(), m.getDatas().get(i).getId());
                             }
-                            mView.getIdentitySuccess(hash);
+                            mView.getGroupSuccess(hash);
                         } else {//数据插入失败
                             mView.getError(m.getMsg());
                         }

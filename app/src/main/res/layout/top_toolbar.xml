@@ -8,10 +8,10 @@
     app:layout_scrollFlags="scroll|enterAlways"
     app:subtitleTextColor="@color/white"
     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     app:title=""
     app:titleTextAppearance="@style/TextAppearance.AppCompat.Small"
     app:titleTextColor="@color/white">
+    <!--app:popupTheme="@style/ToolbarMenuStyle"-->
 
     <TextView
         android:id="@+id/tv_top_center"

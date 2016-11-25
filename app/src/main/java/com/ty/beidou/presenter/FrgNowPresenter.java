@@ -7,7 +7,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.orhanobut.logger.Logger;
 import com.ty.beidou.common.BasePresenter;
-import com.ty.beidou.common.Urls;
+import com.ty.beidou.common.API;
+import com.ty.beidou.common.HttpSimpleRST;
 import com.ty.beidou.model.BaseRespBean;
 import com.ty.beidou.model.LocationBean;
 import com.ty.beidou.model.ResponseBean;
@@ -17,10 +18,6 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -37,19 +34,12 @@ public class FrgNowPresenter extends BasePresenter<IFrgNowView> {
     /**
      * 从服务器获取当前作业人员
      *
-     * @param token
      */
-    public void getLocationsFromServer(String token) {
-        OkHttpClient mOkHttpClient = new OkHttpClient();
-        RequestBody body = new FormBody.Builder()
-                .add("token", token)
-                .build();
-        final Request request = new Request.Builder()
-                .url(Urls.URL_NEARBY).post(body).build();
-        Call call = mOkHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+    public void getLocationsFromServer() {
+        HttpSimpleRST.getDataAutoAddToken(API.URL_NEARBY, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -74,6 +64,7 @@ public class FrgNowPresenter extends BasePresenter<IFrgNowView> {
                 });
             }
         });
+
     }
 
     /**
@@ -81,19 +72,11 @@ public class FrgNowPresenter extends BasePresenter<IFrgNowView> {
      *
      * @param token
      */
-    public void putLocationToServer(String token, String locationJson) {
-        OkHttpClient mOkHttpClient = new OkHttpClient();
-        RequestBody body = new FormBody.Builder()
-                .add("token", token)
-                .add("locationJson", locationJson)
-                .build();
-        Logger.d(locationJson);
-        final Request request = new Request.Builder()
-                .url(Urls.URL_PUT_LOCATION).post(body).build();
-        Call call = mOkHttpClient.newCall(request);
-        call.enqueue(new Callback() {
+    public void putLocationToServer(String locationJson) {
+        HttpSimpleRST.putJsonAutoAddToken( locationJson, API.URL_PUT_LOCATION, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -121,5 +104,6 @@ public class FrgNowPresenter extends BasePresenter<IFrgNowView> {
                 });
             }
         });
+
     }
 }

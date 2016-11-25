@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.orhanobut.logger.Logger;
 import com.ty.beidou.common.BasePresenter;
-import com.ty.beidou.common.Urls;
+import com.ty.beidou.common.API;
 import com.ty.beidou.model.MsgBean;
 import com.ty.beidou.model.ResponseBean;
 import com.ty.beidou.view.IFrgMsgView;
@@ -44,7 +44,7 @@ public class FrgMsgPresenter extends BasePresenter<IFrgMsgView> {
                 .add("token", token)
                 .build();
         final Request request = new Request.Builder()
-                .url(Urls.URL_MSG_ALL).post(body).build();
+                .url(API.URL_MSG_ALL).post(body).build();
         Call call = mOkHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override

@@ -13,6 +13,7 @@
     <!---->
     <!--用户名-->
     <string name="key_user_name">key_user_name</string>
+    <string name="str_work_plan">作业计划</string>
 
     <string-array name="array_identity">
         <item>测量员</item>

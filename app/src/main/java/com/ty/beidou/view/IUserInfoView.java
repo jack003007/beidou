@@ -18,22 +18,18 @@ public interface IUserInfoView extends BaseView {
      */
     void putError(String msg);
 
-    /**
-     * 提交失败
-     */
-    void netError(String msg);
 
     /**
-     * 获取公司名称列表
+     * 获取公司列表
      * @param hash
      */
     void getCompanySuccess(HashMap<String, String> hash);
 
     /**
-     * 获取身份列表
+     * 获取组列表
      * @param hash
      */
-    void getIdentitySuccess(HashMap<String, String> hash);
+    void getGroupSuccess(HashMap<String, String> hash);
 
     /**
      * 获取失败

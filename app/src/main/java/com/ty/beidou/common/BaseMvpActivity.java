@@ -61,11 +61,12 @@ public abstract class BaseMvpActivity<V, T extends BasePresenter<V>> extends App
      */
     public void showLoading() {
         dialog = LoadingDialog.newInstance();
-        dialog.show(getFragmentManager(), "xx");
+        if (dialog.isVisible()) return;
+        dialog.show(getFragmentManager(), "loading");
     }
 
     public void hideLoading() {
-        if (dialog == null) return;
+        if (dialog == null || !dialog.isVisible()) return;
         dialog.dismiss();
     }
 }

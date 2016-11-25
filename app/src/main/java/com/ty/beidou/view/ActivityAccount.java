@@ -18,12 +18,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.libs.view.utils.RegexUtils;
 import com.ty.beidou.R;
 import com.ty.beidou.common.BaseMvpActivity;
 import com.ty.beidou.common.GeneralToolbar;
+import com.ty.beidou.common.MApplication;
 import com.ty.beidou.presenter.IAccountPresenter;
 
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -242,6 +245,11 @@ public class ActivityAccount extends BaseMvpActivity<IAccountView, IAccountPrese
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        btn_operation.performClick();
+    }
 
     /**
      * Called when a view has been clicked.
@@ -270,7 +278,12 @@ public class ActivityAccount extends BaseMvpActivity<IAccountView, IAccountPrese
                         Toast.makeText(me, "密码不要出现除字母和数字以外的字符", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    presenter.doLogin(u, p1);
+                    HashMap<String, String> hash = new HashMap<>();
+                    hash.put("mobile", u);
+                    hash.put("passwd", p1);
+                    hash.put("device_token", MApplication.getInstance().getDevice_token());
+
+                    presenter.doLogin(JSON.toJSONString(hash));
                 } else {//注册
                     if (TextUtils.isEmpty(u) || TextUtils.isEmpty(p1)
                             || TextUtils.isEmpty(p2) || TextUtils.isEmpty(ver)
@@ -361,5 +374,15 @@ public class ActivityAccount extends BaseMvpActivity<IAccountView, IAccountPrese
     public void regisSuccess(String msg) {
         Toast.makeText(me, msg, Toast.LENGTH_SHORT).show();
         toggleUI(true);
+    }
+
+    /**
+     * 网络错误
+     *
+     * @param resourceId
+     */
+    @Override
+    public void netError(int resourceId) {
+        Toast.makeText(me, getResources().getString(resourceId), Toast.LENGTH_SHORT).show();
     }
 }

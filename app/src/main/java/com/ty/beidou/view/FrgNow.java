@@ -33,7 +33,6 @@ import com.libs.view.utils.EmptyUtils;
 import com.orhanobut.logger.Logger;
 import com.ty.beidou.R;
 import com.ty.beidou.common.BaseMvpFragment;
-import com.ty.beidou.common.MApplication;
 import com.ty.beidou.model.LocationBean;
 import com.ty.beidou.presenter.FrgNowPresenter;
 
@@ -142,7 +141,7 @@ public class FrgNow extends BaseMvpFragment<IFrgNowView, FrgNowPresenter> implem
         fabPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(me, ActivityPublishWork.class));
+                startActivity(new Intent(me, ActivityPutWork.class));
             }
         });
         fabPerson.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +156,7 @@ public class FrgNow extends BaseMvpFragment<IFrgNowView, FrgNowPresenter> implem
     public void onResume() {
         super.onResume();
         mMapView.onResume();
-        presenter.getLocationsFromServer(MApplication.getInstance().getToken());
+        presenter.getLocationsFromServer();
     }
 
     @Override
@@ -257,8 +256,7 @@ public class FrgNow extends BaseMvpFragment<IFrgNowView, FrgNowPresenter> implem
                 //定位成功
                 mOnLocationChangedListener.onLocationChanged(aMapLocation);
                 //TODO 上传位置信息
-                presenter.putLocationToServer(MApplication.getInstance().getToken()
-                        , getJsonFromLBean(aMapLocation));
+                presenter.putLocationToServer(getJsonFromLBean(aMapLocation));
 //                aMapLocation.getProvince();//获取省的名称
 //                aMapLocation.getCity();//获取城市名称
 //                aMapLocation.getDistrict();//获取区的名称

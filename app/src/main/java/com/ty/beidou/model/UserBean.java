@@ -5,82 +5,54 @@ package com.ty.beidou.model;
  */
 public class UserBean {
 
+
     /**
-     * id : 1
-     * realname : 真名
-     * nickname : 昵称
-     * phone : 1
+     * id : 5
+     * realname : 你
+     * mobile : 13601821141
      * passwd : 1
-     * headid : null
-     * isonline : 1
-     * token : 0
+     * head_thumb : /Uploads/Head/5834f318758f6.jpg
+     * online : 1
      * longitude : 0
      * latitude : 0
-     * ctime : 2016-10-31 14:57:10
-     * identity : 0
-     * company : 0
+     * create_time : 2016
+     * company_id : 4
+     * last_login_time : 0
+     * last_logout_time : 0
+     * last_update_time : 0
+     * gtitle : 超级管理员
+     * gid : 1
+     * company_name : 上海铁路北斗测量3
+     * token : 111062b31a5c7803f8b0f2c17779c0c1
      */
 
     private String id;
     private String realname;
-    private String phone;
+    private String mobile;
     private String passwd;
-    private String origin;
-
-    public String getHeadthumbnail() {
-        return headthumbnail;
-    }
-
-    public void setHeadthumbnail(String headthumbnail) {
-        this.headthumbnail = headthumbnail;
-    }
-
-    public String getOrigin() {
-        return origin;
-    }
-
-    public void setOrigin(String origin) {
-        this.origin = origin;
-    }
-
-    private String headthumbnail;
-    private String isonline;
+    private String head_thumb;
+    private String online;
     private String longitude;
     private String latitude;
-    private String ctime;
-    private String identity;
-    private String company;
+    private String create_time;
+    private String company_id;
+    private String last_login_time;
+    private String last_logout_time;
+    private String last_update_time;
+    private String gtitle;
+    private String gid;
+    private String company_name;
+    private String token;
 
-    public String getIdentityid() {
-        return identityid;
+    public String getDevice_tokens() {
+        return device_tokens;
     }
 
-    public void setIdentityid(String identityid) {
-        this.identityid = identityid;
+    public void setDevice_tokens(String device_tokens) {
+        this.device_tokens = device_tokens;
     }
 
-    public String getCompanyid() {
-        return companyid;
-    }
-
-    public void setCompanyid(String companyid) {
-        this.companyid = companyid;
-    }
-
-    private String identityid;
-    private String companyid;
-
-    /**
-     * id : 19
-     * passwd : 1
-     * phone : 1
-     * realname : 测试账号
-     * nickname : 一个昵称
-     */
-
-
-    public UserBean() {
-    }
+    private String device_tokens;
 
     public String getId() {
         return id;
@@ -98,13 +70,12 @@ public class UserBean {
         this.realname = realname;
     }
 
-
-    public String getPhone() {
-        return phone;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getPasswd() {
@@ -115,15 +86,21 @@ public class UserBean {
         this.passwd = passwd;
     }
 
-
-    public String getIsonline() {
-        return isonline;
+    public String getHead_thumb() {
+        return head_thumb;
     }
 
-    public void setIsonline(String isonline) {
-        this.isonline = isonline;
+    public void setHead_thumb(String head_thumb) {
+        this.head_thumb = head_thumb;
     }
 
+    public String getOnline() {
+        return online;
+    }
+
+    public void setOnline(String online) {
+        this.online = online;
+    }
 
     public String getLongitude() {
         return longitude;
@@ -141,27 +118,75 @@ public class UserBean {
         this.latitude = latitude;
     }
 
-    public String getCtime() {
-        return ctime;
+    public String getCreate_time() {
+        return create_time;
     }
 
-    public void setCtime(String ctime) {
-        this.ctime = ctime;
+    public void setCreate_time(String create_time) {
+        this.create_time = create_time;
     }
 
-    public String getIdentity() {
-        return identity;
+    public String getCompany_id() {
+        return company_id;
     }
 
-    public void setIdentity(String identity) {
-        this.identity = identity;
+    public void setCompany_id(String company_id) {
+        this.company_id = company_id;
     }
 
-    public String getCompany() {
-        return company;
+    public String getLast_login_time() {
+        return last_login_time;
     }
 
-    public void setCompany(String company) {
-        this.company = company;
+    public void setLast_login_time(String last_login_time) {
+        this.last_login_time = last_login_time;
+    }
+
+    public String getLast_logout_time() {
+        return last_logout_time;
+    }
+
+    public void setLast_logout_time(String last_logout_time) {
+        this.last_logout_time = last_logout_time;
+    }
+
+    public String getLast_update_time() {
+        return last_update_time;
+    }
+
+    public void setLast_update_time(String last_update_time) {
+        this.last_update_time = last_update_time;
+    }
+
+    public String getGtitle() {
+        return gtitle;
+    }
+
+    public void setGtitle(String gtitle) {
+        this.gtitle = gtitle;
+    }
+
+    public String getGid() {
+        return gid;
+    }
+
+    public void setGid(String gid) {
+        this.gid = gid;
+    }
+
+    public String getCompany_name() {
+        return company_name;
+    }
+
+    public void setCompany_name(String company_name) {
+        this.company_name = company_name;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
